@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from xml.etree import ElementTree
 import codecs
 
-from utils import normalize_sentence
+from .utils import normalize_sentence
 
 __author__ = ["Clément Besnier <clemsciences@aol.com>", ]
 
@@ -26,7 +26,6 @@ def read_corpus():
     ltext = []
     for text in root:
         title = text.attrib["title"]
-        print(title)
         lparagraph = []
         for paragraph in text:
             sentences = []
@@ -36,10 +35,9 @@ def read_corpus():
                     lsentence.append(word.text)
                 sentences.append(normalize_sentence(lsentence))
             lparagraph.append(" ".join(sentences))
-        # print("\n\n".join(lparagraph))
         ltext.append("\n\n".join(lparagraph))
     return ltext
 
 
 if __name__ == "__main__":
-    print(read_corpus()[0])
+    print(read_corpus())
